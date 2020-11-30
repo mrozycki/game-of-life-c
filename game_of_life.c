@@ -41,6 +41,20 @@ void board_print(struct board* board) {
     printf("\n");
 }
 
+void board_clear(struct board* board, enum cell state) {
+    int board_size = board->width * board->height;
+    for (int i = 0; i < board_size; ++i) {
+        board->cells[i] = state;
+    }
+}
+
+void board_paste(struct board* source, struct board* destination, int x, int y) {
+    for (int j = 0; j < source->height; ++j) {
+        for (int i = 0; i < source->width; ++i) {
+            set_alive(destination, x+i, y+j, is_alive(source, i, j));
+        }
+    }
+}
 
 enum cell is_alive(struct board* board, int x, int y) {
     if (x >= 0 && x < board->width && y >= 0 && y <= board->height) {

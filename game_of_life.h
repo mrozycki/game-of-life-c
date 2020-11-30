@@ -16,6 +16,9 @@ struct board* board_load(const char* path);
 void board_free(struct board* board);
 void board_print(struct board* board);
 
+void board_clear(struct board* board, enum cell state);
+void board_paste(struct board* source, struct board* destination, int x, int y);
+
 enum cell is_alive(struct board* board, int x, int y);
 void set_alive(struct board* board, int x, int y, enum cell status);
 
