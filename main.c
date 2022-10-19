@@ -3,9 +3,14 @@
 #include "canvas.h"
 #include "game_of_life.h"
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <board>\n", argv[0]);
+        return 1;
+    }
+
     const int animation_size = 500;
-    struct board* max = board_load("max.gol");
+    struct board* max = board_load(argv[1]);
     struct board* current = board_create(animation_size, animation_size);
     board_paste(max, current, (animation_size - max->width)/2, (animation_size - max->height)/2);
     board_free(max);
@@ -16,7 +21,7 @@ int main() {
     char pbm_filename[13];
     for (int i = 0; i < 200; ++i) {
         render(canvas, current);
-        sprintf(pbm_filename, "max/%03d.pbm", i);
+        sprintf(pbm_filename, "out/%03d.pbm", i);
         printf("%s\n", pbm_filename);
         save_pbm(canvas, pbm_filename);
 

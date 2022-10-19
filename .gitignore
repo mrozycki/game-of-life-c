@@ -1,5 +1,9 @@
 Release
 Debug
+build
+
+out/
 *.pbm
 *.png
 *.gif
+*.mp4
